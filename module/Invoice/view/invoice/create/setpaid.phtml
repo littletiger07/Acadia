@@ -1,0 +1,28 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showorder.css');
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->invoice)
+{    
+    $invoice=$this->invoice;
+    $output= '<table class="invoicetable">
+                      <tr><th>ID</th><th>Invoice Number</th><th>Invoice date</th><th>Total Amount</th><th>Invoice Status</th><th>Comment</th></tr>'
+		.'<tr><td>'.$invoice->id.'</td><td>'.$invoice->invoice_number.'</td><td>'.$invoice->invoice_date
+		.'</td><td>'.$invoice->getOrder()->getInvoiceTotal().'</td><td>'.$invoice->invoice_status.'</td><td>'.$invoice->invoice_comment.'</td></tr></table>';
+}
+echo $output;
+?>
+<p> Are you sure you want to set this invoice to paid?<br/><p>
+<?php
+$url = $this->url('invoice/default', array('controller'=>'create',
+    'action' => 'setpaid',
+    
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo $invoice->id; ?>" />
+   
+    <input type="submit" name="setpaid" value="Yes" />
+    <input type="submit" name="setpaid" value="No" />
+</div>
+</form>

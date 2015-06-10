@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Invoice</title>
+    <style type="text/css">
+        .topdiv
+        {
+            width:100%;
+            height:140px;
+            1border: 1px solid black;
+
+
+        }
+        #toptable
+        {   1border: 1px solid black;
+
+            width:100%;
+        }
+        #toptdaddress
+        {   1border: 1px solid black;
+            font-size: 140%;
+            1line-height:150%;
+            width:50%;
+            text-align: left;
+        }
+        .invoice
+        {
+            font-size: 150%;
+            text-align: right;
+            vertical-align: top;
+        }
+        .tableinside
+        {
+            border-collapse: collapse;
+            1border: 1px solid black;
+            width: 80%;
+            height: 60px;
+            margin-left: 20%;
+            margin-top: 0px;
+        }
+        .thinside
+        {   font-size: 80%;
+            border: 1px solid black;
+            width: 20%;
+            height: 30px;
+            text-align: center;
+            vertical-align:middle;
+            border-bottom: 1px solid black;
+        }
+        .tdinside
+        {   border: 1px solid black;
+            font-size: 80%;
+            text-align: center;
+        }
+        .addresstable
+        {
+            width: 100%;
+            height: 150px;
+            1border: 1px solid black;
+            border-collapse: collapse;
+
+        }
+        .addresstableth
+        {
+            padding-left: 10px;
+            font-size:80%;
+            text-align: left;
+            border: 1px solid black;
+            height:20px;
+            width: 45%
+
+        }
+        .addresstabletd
+        {
+
+            padding-left:10px;
+            font-size: 80%;
+            border: 1px solid black;
+            vertical-align: top;
+            padding-top: 5px;
+        }
+        .middletable
+        {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-top: 35px;
+            width: 70%;
+            margin-left:15%;
+            height: 60px;
+        }
+        .middletable th
+        {
+            border:1px solid black;
+            font-size: 80%;
+            text-align: center;
+            height:25px;
+        }
+        .middletable td
+        {
+            border: 1px solid black;
+            font-size: 80%;
+            text-align: center;
+            height: 35px;
+        }
+        #bigtable
+        {
+            width:100%;
+
+            height:240px;
+            font-size:80%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #bigtable th
+        {
+            border: 1px solid black;
+            height:20px;
+            text-align: center;
+        }
+        #bigtable td
+        {
+
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            height:20px;
+            vertical-align: top;
+            padding-top: 2px;
+            text-align: left;
+            padding-left: 3px;
+        }
+
+
+        div
+        {
+            width: 100%;
+
+            font-size:80%;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body >
+
+<form action="" method="post">
+<div class="topdiv">
+    <table id="toptable">
+        <tr >
+            <td id="toptdaddress"> Acadia Scientific LLC <br /> 27100 Oakmead Dr Suite 305 <br /> Perrysburg, OH 43551 USA <br /> Tel: 567-208-0370 <br /> email:sales@acadiascientific.com</td>
+            <td class=invoice>Invoice
+
+                <table class=tableinside>
+                    <tr>
+                        <th class=thinside>Date</th>
+
+                        <th class=thinside>Invoice #</th>
+                    </tr>
+                    <tr>
+                        <td class=tdinside><input type="text" name=invoice_date value="<?php echo $data['invoice_date'];?>"></input></td>
+
+                        <td class=tdinside><input type="text" name=invoice_number value="<?php echo $data['invoice_number'];?>"></input></td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>
+<table class=addresstable>
+    <tr>
+        <th class=addresstableth> Bill To:</th>
+        <th style="width:10%; border:0px;"></th>
+        <th class=addresstableth> Ship To:</th>
+    </tr>
+    <tr>
+        <td class=addresstabletd><textarea rows="10" cols="40" name="billing_address"> <?php echo nl2br($data['billing_address']);?></textarea></td>
+        <td style="width:10%;border: 0px;"></td>
+        <td class=addresstabletd><textarea rows="10" cols="40" name="shipping_address"><?php echo nl2br($data['shipping_address']);?></textarea> </td>
+    </tr>
+
+</table>
+<table class=middletable>
+    <tr>
+        <th>P.O.Number</th>
+        <th>Terms</th>
+        <th>Invoice date</th>
+      
+        <th>Due Date</th>
+        
+    </tr>
+    <tr>
+        <td style="width:40%"><input type="text" name="PO_Number" value="<?php echo $data['PO_Number']; ?>"/></td>
+        <td style="width:20%"><input type="text" name="term" value="<?php echo $data['term'];?>"/></td>
+        <td style="width:20%"><input type="text" name="invoice_date" value="<?php echo $data['invoice_date'];?>"/></td>
+      
+        <td style="widdth:20%"><input type="text" name="due_date" value="<?php echo isset($data['due_date'])? $data['due_date']:'';?>"/></td>
+       
+    </tr>
+</table>
+<table id=bigtable>
+    <tr>
+        <th style="width:5%">Quantity</th>
+        <th style="width:15%">Item</th>
+        <th style="width: 45%">Description</th>
+        <th style="width:15%">Package Size (grams)</th>
+        <th style="width:10%">Price Each</th>
+        <th>Amount</th>
+    </tr>
+    <?php 
+        $total=0;
+        $i=1;
+        foreach($items as $item)
+        {
+            $total=$total+$item['price'];
+            $output='<tr><td><input type="text" name="line'.$i.'_quantity" value="'.$item['shipping_quantities'].'"/></td><td><input type="text" name=
+            "line'.$i.'_item" value="'.$item['catalogNo'].'"/></td><td><input type="text" name="line'.$i.'_description" value="'.$item['name'].'"/></td>
+                <td><input type="text" name="line'.$i.'_package_size" value="'.$item['amount'].'"/></td>
+                <td><input type="text" name="line'.$i.'_price_each" value="'.$item['price'].'"/></td><td><input type="text" name="line'
+                .$i.'_amount" value="'.$item['price'].'"/></td></tr>';
+            echo $output;
+            $i++;
+        }
+        $total=$total+$shipping->cost;
+        echo '<tr><td><input type="text" name="line'.$i.'_quantity" value="1"/></td><td><input type="text" name=
+            "line'.$i.'_item" value="shipping"/></td><td><input type="text" name="line'.$i.'_description" value="'.$shipping->description.' tracking No:'.$shipping->tracking.'"/></td>
+                <td><input type="text" name="line'.$i.'_package_size" /></td>
+                <td><input type="text" name="line'.$i.'_price_each" value="'.$shipping->cost.'"/></td><td><input type="text" name="line'
+                .$i.'_amount" value="'.$shipping->cost.'"/></td></tr>';
+        $i++;
+//         foreach($shippings as $shipping)
+//         {
+            
+//             $output='<tr><td>1</td><td>Shipping</td><td>'.$shipping->description.' Tracking No: '.$shipping->tracking.'</td>
+//                 <td></td><td>'.$shipping->cost.'</td><td>'.$shipping->cost.'</td></tr>';
+//             echo $output;
+//         }
+        
+//         foreach($costs as $cost)
+//         {
+//             $output='<tr><td>1</td><td>'.$cost->cost_name.'</td><td>'.$cost->cost_description.'</td>
+//                 <td></td><td>'.$cost->cost_amount.'</td><td>'.$cost->cost_amount.'</td></tr>';
+//             echo $output;
+//         }
+        
+        for (;$i<=12;$i++)
+        {
+            echo '<tr><td><input type="text" name="line'.$i.'_quantity" /></td><td><input type="text" name=
+            "line'.$i.'_item" /></td><td><input type="text" name="line'.$i.'_description" /></td>
+                <td><input type="text" name="line'.$i.'_package_size" /></td>
+                <td><input type="text" name="line'.$i.'_price_each" /></td><td><input type="text" name="line'
+                .$i.'_amount" /></td></tr>';
+        }    
+        
+        echo '<tr><th colspan="4"></th><th>Total</th><th><input type="text" name="total" value="'.$total.'"/></th></tr>';
+                
+    ?>
+  
+</table>
+
+<div>
+    <p>Payment Method: 1) ACH and wire transfer: Routing ID: 0410010395, Bank name: KEY BANK, Swift code: KEYBUS33, Account number: 353401006104, Account name: Acadia Scientific LLC ); 2) MAKE CHECK PAYABLE TO: Acadia Scientific LLC, MAIL CHECK TO THE ADDRESS ABOVE; 3) CREDIT CARD
+    </p>
+</div>
+<div>
+
+    <p style=" font-style: italic; color: green">Acadia Scientific products are ONLY for R&D use, NOT for any other purposes, and must be handled by trained personnel.</p>
+    <input type="submit" name="send" value="submit"/>
+</div>
+</form>
+</body>
+</html>

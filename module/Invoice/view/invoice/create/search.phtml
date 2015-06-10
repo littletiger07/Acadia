@@ -1,0 +1,58 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showitems.css');
+$this->headLink()->appendStylesheet('/css/form.css');
+
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('invoice/default', array('controller'=>'create','action'=>'search')));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}
+else 
+{
+    if($this->rowset)
+    {
+        
+        	$output='<table><tr>'
+        			.'<th>Id</th>'
+        			.'<th>Invoice Number</th>'
+        					.'<th>Order No</th>'
+        							.'<th>Invoice Date</th>'
+        							 	.'<th>Due Date</th>'   
+        									.'<th>Total Amount</th>'
+        									 	.'<th>Status</th>'
+        
+        
+        											.'</tr>';
+        
+        
+        	foreach($this->rowset as $row)
+        	{
+
+        	    $url=$this->url('order/default', array('controller'=>'search', 'action'=>'show'));
+        		$order_id=$row->getOrder()->id; 
+        		$output.=
+        
+        
+        		'<tr>'
+			
+        		.'<td><a href="'.$url.'?id='.$row->id.'">'.$row->id.'</a></td>'
+        		     .'<td><a href="'.$url.'?id='.$order_id.'&showblock=3">'.$row->invoice_number.'</a></td>'
+        				.'<td><a href="'.$url.'?id='.$order_id.'&showblock=3">'.$row->getOrder()->PO_Number.'</a></td>'
+        						.'<td><a href="'.$url.'?id='.$order_id.'&showblock=3">'.$row->invoice_date.'</a></td>'
+        								.'<td>'.$row->getDueDate().'</td>'
+        										.'<td>'.$row->getOrder()->getInvoiceTotal().'</td>'
+        										    .'<td>'.$row->invoice_status.'</td>'
+        												.'</tr>';
+        
+        	}
+        	$output.='</table>';
+        	echo $output;
+        }
+        else
+        	echo "No Record Found";
+        
+    }        

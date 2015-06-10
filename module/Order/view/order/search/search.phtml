@@ -1,0 +1,49 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showitems.css');
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->form)
+{
+    $form=$this->form;
+    $form->setAttribute('action', $this->url('order/default', array('controller'=>'search','action'=>'search')));
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    echo $this->formCollection($form);
+    echo $this->form()->closeTag();
+}
+else 
+if ($this->rowset)
+{
+    $output='<table><tr>'
+				.'<th>Id</th>'
+				.'<th>PO_Number</th>'
+				.'<th>Customer</th>'
+				.'<th>Order Date</th>'
+				.'<th>Total Amount</th>'
+                
+		
+			    .'</tr>';
+    
+    
+    foreach($this->rowset as $row)
+    {
+        $url=$this->url('order/default', array('controller'=>'search', 'action'=>'show'));
+     
+        $output.=
+
+		
+			    '<tr>'
+			  
+			    .'<td><a href="'.$url.'?id='.$row->id.'">'.$row->id.'</a></td>'
+			    .'<td><a href="'.$url.'?id='.$row->id.'">'.$row->PO_Number.'</td>'
+			    .'<td><a herf="/customer/search/show?id='.$row->getcustomer()->id.'">'.$row->getCustomer()->customer_name.'</td>'
+			    .'<td><a href="'.$url.'?id='.$row->id.'">'.$row->order_date.'</td>'
+			    .'<td>'.$row->getOrderTotal().'</td>'
+			    .'</tr>';
+        
+    }
+    $output.='</table>';
+    echo $output;
+}
+else 
+    echo "No Record Found";
+

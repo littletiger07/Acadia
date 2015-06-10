@@ -1,0 +1,215 @@
+<?php  $data=$this->data;?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Packing List</title>
+    <style type="text/css">
+
+        .topdivn
+        {
+            width:100%;
+            height:140px;
+            1border: 1px solid black;
+
+
+        }
+        #toptable
+        {   1border: 1px solid black;
+
+            width:100%;
+        }
+        #toptdaddress\n
+        {   1border: 1px solid black;
+            font-size: 140%;
+            1line-height:150%;
+            width:50%;
+            text-align: left;
+        }
+        .invoice
+        {
+            font-size: 150%;
+            text-align: right;
+            vertical-align: top;
+        }
+        .tableinside
+        {
+            border-collapse: collapse;
+            1border: 1px solid black;
+            width: 80%;
+            height: 60px;
+            margin-left: 20%;
+            margin-top: 0px;
+        }
+        .thinside
+        {   font-size: 80%;
+            border: 1px solid black;
+            width: 20%;
+            height: 30px;
+            text-align: center;
+            vertical-align:middle;
+            border-bottom: 1px solid black;
+        }
+        .tdinside
+        {   border: 1px solid black;
+            font-size: 80%;
+            text-align: center;
+        }
+        .addresstable
+        {
+            width: 100%;
+            height: 150px;
+            1border: 1px solid black;
+            border-collapse: collapse;
+
+        }
+        .addresstableth
+        {
+            padding-left: 10px;
+            font-size:80%;
+            text-align: left;
+            border: 1px solid black;
+            height:20px;
+            width: 45%
+
+        }
+        .addresstabletd
+        {
+
+            padding-left:10px;
+            font-size: 80%;
+            border: 1px solid black;
+            vertical-align: top;
+            padding-top: 5px;
+        }
+        .middletable
+        {
+            border: 1px solid black;
+            border-collapse: collapse;
+            margin-top: 35px;
+            width: 90%;
+            margin-left:5%;
+            height: 60px;
+        }
+        .middletable th
+        {
+            border:1px solid black;
+            font-size: 80%;
+            text-align: center;
+            height:25px;
+        }
+        .middletable td
+        {
+            border: 1px solid black;
+            font-size: 80%;
+            text-align: center;
+            height: 35px;
+        }
+        #bigtable
+        {
+            width:100%;
+
+            height:300px;
+            font-size:80%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #bigtable th
+        {
+            border: 1px solid black;
+            height:20px;
+            text-align: center;
+        }
+        #bigtable td
+        {
+
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            height:20px;
+            vertical-align: top;
+            padding-top: 2px;
+            text-align: left;
+            padding-left: 3px;
+        }
+
+
+        div
+        {
+            width: 100%;
+
+            font-size:80%;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="topdiv">
+    <table id="toptable">
+        <tr >
+            <td id="toptdaddress"> Acadia Scientific LLC <br /> 27100 Oakmead Dr Suite 305 <br />Perrysburg, OH 43551 USA <br />Tel: 567-208-0370 <br /> email:sales@acadiascientific.com</td>
+            <td class=invoice>Packing List
+
+                <table class=tableinside>
+                    <tr>
+                        <th class=thinside>Date</th>
+
+                        <th class=thinside>Purchase Order #</th>
+                    </tr>
+                    <tr>
+                        <td class=tdinside><?php echo $data['shipping_date'];?> </td>
+
+                        <td class=tdinside><?php echo $data['PO_Number'];?> </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>
+<br/>
+<br/>
+<table class="addresstable">
+    <tr>
+        <th class=addresstableth> Bill To:</th>
+        <th style="width:10%; border:0px;"></th>
+        <th class=addresstableth> Ship To:</th>
+    </tr>
+    <tr>
+        <td class="addresstabletd"><?php echo nl2br($data['address']);?> </td>
+        <td style="width:10%;border: 0px;"></td>
+        <td class="addresstabletd"><?php echo nl2br($data['shipping_address']);?></td>
+    </tr>
+
+</table>
+
+<table id="bigtable" style="margin-top: 25px">
+    <tr>
+        <th style="width:15%">Quantity</th>
+        <th style="width:20%">Item</th>
+        <th style="width: 50%">Description</th>
+        <th style="width:15%">Package_size</th>
+    </tr>
+    <?php 
+    foreach($this->items as $item)
+    {
+        $output='<tr><td>'.$item["shipping_quantities"].'</td>
+                  <td>'.$item["catalogNo"].'</td>
+                  <td>'.$item["name"].'</td>
+                  <td>'.$item["amount"].'gram(s)
+                  </tr>';
+        echo $output;
+    }
+    for ($i=$this->items->count(); $i<=12; $i++)
+    {
+        echo '<tr><td></td><td></td><td></td><td></td></tr>';
+        
+    }
+    echo '</table>';
+    ?>
+    
+    <div style="margin-top: 50px">
+    <p style="font-size: 100%; font-style: italic">Acadia Scientific products are ONLY for R&D use, NOT for any other purposes, and must be handled by trained personnel.</p>
+</div>
+</body>
+</html>

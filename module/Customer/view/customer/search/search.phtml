@@ -1,0 +1,41 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showitems.css');
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->form)
+{
+   echo ' <form action="/customer/search/search" method="get" name="SearchCustomer" id="SearchCustomer">
+ <label><span>Enter Search Text</span><input name="searchText" type="text" class="searchText" size="64" value="">
+ </label><input style="display: inline" name="send" type="submit" value="Search">
+       <button type="button" style="display:inline;height: 24px; margin-left:50px; " onclick="location.href(\'/customer/search/showall\')">ShowAll</button></form>';
+}
+else 
+if ($this->rowset)
+{
+    $output='';
+  
+        $url=$this->url('customer/default', array('controller'=>'search', 'action'=>'show'));
+     
+        $output.='<table><tr>'
+				.'<th>Id</th>'
+				.'<th>Name</th>'
+				.'<th>term</th>'
+                .'<th>Phone</th>'
+		      
+		        .'<th>Email</th>'
+			    .'</tr>';
+        foreach($this->rowset as $row)
+        {	  
+			    $output.='<tr><td><a href="'.$url.'?id='.$row->id.'">'.$row->id.'</a></td>'
+			    .'<td><a href="'.$url.'?id='.$row->id.'">'.$row->customer_name.'</a></td>'
+			    .'<td>'.$row->term.'</td>'
+			    .'<td>'.$row->phone.'</td>'
+			  
+			    .'<td>'.$row->email.'</td>' 
+			    .'</tr>';
+        
+    }
+    $output.='</table>';
+    echo $output;
+}
+else echo 'NO Record Found!!';
+

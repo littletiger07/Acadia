@@ -1,0 +1,27 @@
+<?php
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('invoice/default', array('controller'=>'create','action'=>'create')));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}
+?>
+<script>
+
+
+
+    $(function() {
+    	$('[name="invoice_date"]').addClass("datepicker");
+    	
+
+        $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" }).val();
+
+
+    });
+
+
+</script>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Welcome to Acadia Scientific</title>
+ <?php $this->headScript()->offsetSetFile(1,"http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js")?>
+ <?php $this->headScript()->offsetSetFile(2,"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js")?>
+ <?php   echo $this->headLink()->appendStylesheet('/css/test.css');?>
+ <?php  echo $this->headScript();?>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+ 
+    
+</head>
+<body>
+<div class="banner_div">
+    <span>login</span>
+    <img src="/img/banner.png" width="900px"  border="0" usemap="#Map" />
+    <map name="Map" id="Map"><area shape="rect" coords="19,22,690,102" href="/web/index.html" />
+        <area shape="rect" coords="706,101,840,121" href="mailto:sales@acadiascientific.com" />
+    </map>
+</div>
+<div class="middle_div">
+    <div class="address_div">
+        <span>Contact us</span>
+        <h3>address</h3>
+    </div>
+    <img src="/img/1.jpg" alt="Lab Photo"/>
+    <img src="/img/2.jpg" alt="Lab Photo"/>
+    <img src="/img/3.jpg" alt="Lab Photo"/>
+    <img src="/img/4.jpg" alt="Lab Photo"/>
+</div>
+<div class="main_div">
+    <div class="menu_div">
+
+        <ul class="menu">
+            <li>Home</li>
+            <li>Catalog</li>
+                <li><ul class="submenu" id="catalog_submenu">
+                    <li><a href="/catalog" >Search Catalog</a></li>
+                    <li><a href="/catalog/update/add">Add New Item</a></li>
+                    
+                </ul></li>
+            <li>Customer</li>
+                <li><ul class="submenu" id="customer_submenu">
+                    <li><a href="/customer/search/search">Search Customer</a></li>
+                    <li><a href="/customer/update/add">Add Customer</a></li>
+                    <li><a href="/customer/search/showall">Show All Customer</a></li>
+                </ul></li>
+            <li>Orders</li>
+                <li><ul class="submenu" id="order_submenu">
+                    <li><a href="/order">Search Orders</a></li>
+                    <li><a href="/order/search/advancedsearch">Advanced Search</a></li>
+                    <li><a href="/order/update/add">Add Order</a></li>
+                </ul></li>
+            <li>Invoice</li>
+                <li><ul class="submenu" id="invoice_submenu">
+                    <li><a href="/invoice/create/search">Search Invoice</a></li>
+                    <li><a href="/invoice/create/showoverdue">Overdue Invoices</a></li>
+                    <li><a href="/invoice/create/showoutstanding">Outstanding Invoices </a></li>
+                </ul></li>
+            <li>My Account</li>
+        </ul>
+    </div>
+    <div class="content_div">
+       <?php if(isset($flashMessages)) : ?>
+    <ul class="flash-messages">
+    <?php foreach ($flashMessages as $flashMessage) : ?>
+    <li><?php echo $flashMessage; ?></li>
+    <?php endforeach; ?> 
+    </ul>
+    <?php endif; ?>
+     
+            
+            
+            <?php echo $this->content; ?>
+    </div>
+</div>
+<div class="bottom_div">
+    <img src="/img/tub.jpg" />
+    <p>Copyright 2013 Acadia Scientific, LLC.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+table tr td div form input{
+	background-color: yellow;
+	color:#B77606;
+}
+.content_div table{
+	width: 650px;
+	font-size:small;
+	border-collapse: separate;
+           border-spacing: 2px;
+ 	text-align: center;
+	
+}
+.content_div  th{
+	color: #B77606;
+	background-color:#F3F3F3;
+}
+.content_div td{
+	background-color:#F3F3F3;
+}
+.order_items{
+	margin: 10px;
+	margin-left:0;
+	padding: 10px;
+}
+.order_item_actions{
+	width:120px;
+	height:100px;
+}
+.content_div span{
+	color: blue;
+	font-size: medium;
+}
+
+.order_actions table tr td div{
+	margin: 0;
+	width: 120px;
+}
+.order_actions table tr td div form{
+	margin:0;
+}
+.order_actions table tr td div form input{
+	margin: 0;
+	margin-left: 40px;
+}
+
+.item_table{
+	
+}
+
+.shipping{
+	margin: 20px;
+	width: 600px;
+	
+}
+
+.shipping_table{
+	width: 90%;
+	margin: 20px;
+	margin-left:0;
+	table-layout: fixed;
+}
+.shipping_table tr td div{
+	width:60px;
+	height: 40px;
+	align: center;
+}
+.shipping_table tr td div form{
+	margin:0;
+}
+.shipping_table tr td div form input{
+	margin: 10px;
+	margin-left:20px;
+}
+.shipping_items{
+	margin-left: 60px;
+	margin-top: 20px;
+	padding: 10px;
+	width: 500px;
+}
+.shipping_item{
+	width: 500px;
+
+	margin-top: 20px;
+	padding: 10px;
+}
+.shipping_item table{
+	width: 100% ! important;
+	
+}
+.shipping_item table tr:nth-child(even){
+	background-color: yellow;
+}
+.shipping_item table tr td div{
+	width: 60px;
+	
+}
+.shipping_item table tr td div form{
+	margin:0;
+	
+}
+.shipping_item table tr td div form input{
+	margin:0px;
+	margin-left: 30pxpx;
+}
+.cost{
+	margin: 20px;
+}
+.cost_item{
+	
+	display:none;
+	width: 500px;
+}
+.cost_item_table{
+
+	
+	table-layout: fixed;
+	width: 100% !important;
+	margin: 0;
+}
+.cost_item_table tr td div{
+	
+	width: 60px;
+	margin: 0;
+	margin-left:25px;
+}
+.cost_item_table tr td div form{
+	margin: 0;
+}
+.cost_item_table tr td div form input{
+	margin: 0;
+}
+.invoice{
+	margin: 20px;
+}
+
+.showinvoice{
+	width: 600px;
+	display:none;
+}
+.invoicetable{
+	table-layout: fixed;
+	width: 100% !important;
+	margin: 0;
+	
+}
+
+.invoicetable tr td div{
+	
+	width: 60px;
+	margin: 0;
+	margin-left:25px;
+}
+.invoicetable tr td div form{
+	margin: 0;
+}
+.invoicetable tr td div form input{
+	margin: 0;
+}

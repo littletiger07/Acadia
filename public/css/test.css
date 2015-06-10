@@ -1,0 +1,167 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    width:1000px;
+    margin:0 auto;
+
+}
+.error{
+	color:red;
+}
+div{
+
+
+    font-family:san-serif;
+    font-size:larger;
+
+}
+.flash-messages{
+	color: red;
+	font-size: larger;
+}
+.banner_div{
+
+    height:300px;
+
+}
+
+
+.banner{
+	margin-top:50px;
+}
+.banner_div span{
+    margin-top:30px;
+    margin-right:100px;
+    font-size:smaller;
+    color:green;
+    float:right;
+}
+
+.login{
+	
+	margin-top:50px;
+	//margin-left:200px;
+	//width:300px;
+	//height:300px;
+	align:center;
+	font-size:24px;
+	line-height:24px;
+}
+
+.login table{
+	margin-top: 25px;
+}
+.login tr{
+	margin-top:20px;
+}
+.login td{
+	align:left;
+	
+	
+}
+
+
+.middle_div{
+    height:150px;
+}
+
+.middle_div img{
+    width:165px;
+    height:150px;
+}
+.address_div{
+    background:url(../img/left10.jpg) right repeat-y;
+	background-color: #E4E8BA;
+    width:280px;
+    height:150px;
+    float:left;
+}
+
+.address_div span{
+    width:300px;
+    text-align: center;
+    display:block;
+    background:url(../img/2.png) center no-repeat;
+}
+
+
+
+.main_div{
+
+}
+.menu_div{
+    background:url(/img/left10.jpg) right top repeat-y;
+    background-color: #FFE36D;
+    width:280px;
+    height:600px;
+
+    float:left;
+
+}
+
+.menu{
+    width:280px;
+    color:#87320d;
+    font-size:22px;
+    font-weight:bold;
+    list-style: none;
+    margin: 5px 0 0 5px;
+    float:left;
+}
+.menu li{
+    margin-top:5px;
+}
+.submenu{
+    font-size:18px;
+    list-style:none;
+    margin-left:10px;
+
+
+}
+.content_div{
+   
+    margin-top:10px;
+    width:700px;
+    height:600px;
+    float:left;
+	overflow:auto;
+    width:680px;
+
+    color:#686868;
+   
+}
+
+.content_div form{
+    
+	vertical-align: middle;
+	margin-left: 60px;
+	margin-top: 30px;
+	width:650px;
+    font-size:14px;	
+ }
+ 
+ 
+ .content_div label{
+	
+ 	color:#B77606;
+ }
+ .content_div form input{
+ 	
+ 
+ 	margin-bottom: 12px;
+ 	margin-top: 5px;
+	display:block;
+ 	height: 24px;
+ }
+.show{
+	font-size: small;
+	width: 100%;
+}
+
+
+
+.bottom_div{ width:1000px; margin:0 auto; border-top:1px solid #2e9400; text-align:center; padding:30px 0; float:left; overflow:hidden;}
+.bottom_div p{ line-height:30px; color:#999;}

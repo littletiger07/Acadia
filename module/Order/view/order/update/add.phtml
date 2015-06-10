@@ -1,0 +1,123 @@
+<?php
+$this->headLink()->appendStylesheet('/css/form.css?version=1');
+
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('order/default', array('controller'=>'update','action'=>'add')));
+	$form->get('shipping_address')->setLabel('');
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formHidden($form->get('id'));
+	echo $this->formRow($form->get('PO_Number'));
+	echo $this->formRow($form->get('customer_id'));
+	echo '<br/>';
+	echo '<label ><span>Customer Billing Address </span><div id="billing_address"></div></label>';
+	echo '<label ><span>Enter Shipping Address </span><select name="shipping_address_selector" id="shipping_address_selector">
+			
+			</select>';
+	echo $this->formRow($form->get('shipping_address'));
+	echo $this->formRow($form->get('order_date'));
+	echo $this->formRow($form->get('order_email'));
+	echo $this->formRow($form->get('order_phone'));
+	echo $this->formRow($form->get('status'));
+	echo $this->formRow($form->get('order_comment'));
+	echo $this->formElement($form->get('send'));
+	
+	//echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}
+?>
+<script>
+billingAddress='';
+shippingAddress='';
+shippingAddressCount=0;
+String.prototype.nl2br = function()
+{
+    return this.replace(/\n/g, "<br />");
+}
+
+
+    $(function() {
+    	$('[name="order_date"]').addClass("datepicker");
+    	
+
+        $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" }).val();
+
+    	
+		$.get('/customer/search/getaddress',{id: $('#customer_id').val()}).done(function(data){
+			billingAddress=data;
+			$('#billing_address').html(data.nl2br());
+			//$('#shipping_address').html(data);
+			});
+	
+		
+		$.get('/customer/search/getshippingaddresscount',{id: $('#customer_id').val()}).done(function(data){
+			
+			shippingAddressCount=parseInt(data);
+			$('#shipping_address_selector').append('<option value="-1">Add New</option><option value="0">Using Billing Address</option>');
+			
+			for (i=1;i<=shippingAddressCount;i++)
+			{
+
+				
+				str='<option value="'+i+'">Using Address '+i+'</option>';
+			
+				$('#shipping_address_selector').append(str);
+			}
+			
+			});
+
+	
+		
+
+		
+		$('#customer_id').change(function(){
+			$('#shipping_address').empty();
+			$.get('/customer/search/getaddress',{id: $('#customer_id').val()}).done(function(data){
+				$('#billing_address').html(data.nl2br());				
+				$.get('/customer/search/getshippingaddresscount',{id: $('#customer_id').val()}).done(function(data){
+					
+					shippingAddressCount=parseInt(data);
+					$('#shipping_address_selector').empty();
+					$('#shipping_address_selector').append('<option value="-1">Add New</option><option value="0">Using Billing Address</option>');
+					
+					for (i=1;i<=shippingAddressCount;i++)
+					{
+						
+						str='<option value="'+i+'">Using Address '+i+'</option>';
+					
+						$('#shipping_address_selector').append(str);
+					}
+					
+					});
+				});
+		
+			
+    	});
+
+    	
+
+    	$('#shipping_address_selector').change(function(){
+        	index=$('#shipping_address_selector').val();
+        	if (index=="-1")
+        	{
+            	$('#shipping_address').empty();
+            	return;
+            }
+
+            if (index=="0")
+            {
+            	$.get('/customer/search/getaddress',{id: $('#customer_id').val()}).done(function(data){
+            		$('#shipping_address').html(data);
+                	});
+            	return;
+            }    
+        	$.get('/customer/search/getshippingaddress',{id: $('#customer_id').val(),index:index}).done(function(data){
+        		$('#shipping_address').html(data);
+            	});
+        	
+    	});
+    });
+
+</script>

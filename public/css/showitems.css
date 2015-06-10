@@ -1,0 +1,23 @@
+.content_div table{
+	margin-left: 20px;
+	margin-top:20px;
+	width: 630px;
+	font-size:small;
+	border-collapse: separate;
+           border-spacing: 2px;
+ 	text-align: center;
+	cellspacing:5px;
+	cellpadding: 5px;
+}
+.content_div table tr:nth-child(even){
+	background-color: yellow;
+}
+.content_div table th{
+	align:center;
+	color:#b77606;
+	
+}
+
+.content_div table td{
+	line-height: 24px;
+}

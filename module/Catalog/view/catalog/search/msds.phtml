@@ -1,0 +1,249 @@
+<?php
+if ($this->form)
+{
+    $form=$this->form;
+    $form->setAttribute('action', $this->url('catalog/default', array('controller'=>'search','action'=>'msds')));
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    echo $this->formCollection($form);
+    echo $this->form()->closeTag();
+    exit();
+}
+
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <style type="text/css">
+        .title {font-family:Sans-Serif;
+            font-size: 32;
+            font-style: italic;
+            text-align: left;
+            color: Green;
+            margin-left: 5%;
+        }
+        div {font-family:Times New Roman;
+            font-size: 125%;
+            text-align: center;
+        }
+        .note{font-family: Times New Roman;
+            font-size:70%;
+            font-style: italic;
+            text-align: center;
+        }
+        div.hr {
+            border: none;
+            border-bottom:3px solid green;
+            border-top:1px solid green;
+            clear:both;
+            height:0;
+            width: 90%;
+            margin-left: 5%;
+        }
+        p{ font-family: Times New Roman;
+            font-size: 85%;
+            text-align: justify;
+            margin-left: 5%;
+            margin-right:5%;
+        }
+    </style>
+    <?php
+    echo "<title>Material Safty Data Sheet for $_POST[catalogNo]</title>\n";
+    ?>
+</head>
+<body>
+<div class=title>Acadia Scientific LLC</div>
+<div class=hr></div>
+<br />
+<div><strong>Material Safty Data Sheet</strong></div>
+<div class="note">Revision Date 01/20/2013</div>
+<p>According to Regulation (EC) No. 1907/2006 Version 4.0 Revision Date 4/25/2011 Print Date 05.23.2011 GENERIC EU MSDS - NO COUNTRY SPECIFIC DATA - NO OEL DATA </p>
+
+
+
+<p>
+    <?php
+    echo "<strong>1. PRODUCT AND COMPANY IDENTIFICATION</strong><br /> Product Name: $_POST[name] <br />\n";
+    echo "Product Number: $data[catalogNo]<br />\n";
+    ?>
+    Company: Acadia Scientific LLC <br /> Address:27100 Oakmead Dr. Suite 305
+    <br /> Perrysburg, OH 43551,USA <br /> Telephone: 567-208-0370 <br />Fax: 567-686-1020<br /></p>
+<p><strong>2. COMPOSITION/INFORMATION ON INGREDIENTS</strong><br />
+    <?php
+    echo "CAS RN: $data[cas] <br />\n";
+    echo "Chemical Formula: $data[formula] <br />\n";
+    echo "Molecular Weight: $data[mw]</p>\n";
+    ?>
+<p>
+    <strong>3.HAZARDS INFORMATION<br /> Emergency Overview <br /></strong>
+    Irritating to skin, eyes, and respiratory system.<br />
+    May have harmful effects if inhaled or swallowed. <br />
+    Avoid prolonged exposure. <br />
+    Do not breathe vapor. <br />
+    Use caution when handling. <br />
+    Exposure to any chemical should limited. <br />
+    To the best of our knowledge, the health hazards of this material have not been fully investigated. <br />
+    Material is for research and development purposes only. <br />
+</p>
+<p>
+    <strong>OSHA Hazards<br /></strong>
+    Toxic by ingestion. Harmful by skin absorption. Skin sensitizer <br />
+</p>
+<p>
+    <strong>Inhalation</strong>May be harmful if inhaled. Material is extremely destructive to the tissue of the mucous membranes and upper respiratory tract<br />
+    <strong>Skin</strong> Harmful if absorbed through skin. Causes skin burns.<br />
+    <strong>eyes</strong>Causes eye burns. <br />
+    <strong>Ingestion</strong>Toxic if swallowed.<br />
+</p>
+<p>
+    <strong>4. FIRST AID MEASURES</strong><br />
+    <strong>General advice</strong><br />
+    Consult a physician. Show this safety data sheet to the doctor in attendance. Move out of dangerous area.<br />
+    <strong>If inhaled</strong><br />
+    If breathed in, move person into fresh air. If not breathing give artificial respiration Consult a physician.<br />
+    <strong>In case of skin contact</strong><br />
+    Take off contaminated clothing and shoes immediately. Wash off with soap and plenty of water. Consult a physician.<br />
+    <strong>In case of eye contact</strong><br />
+    Continue rinsing eyes during transport to hospital. Rinse thoroughly with plenty of water for at least 15 minutes and consult a physician.<br />
+    <strong>If swallowed</strong><br />
+    Do NOT induce vomiting. Never give anything by mouth to an unconscious person. Rinse mouth with water. Consult physician.<br />
+</p>
+<p>
+    <strong>5. FIRE-FIGHTING MEASURES</strong> <br/>
+    <strong> Flammable properties </strong><br />
+    Flash point no data available  <br />
+    <strong>Suitable extinguishing media  </strong><br />
+    Use water spray, alcohol-resistant foam, dry chemical or carbon dioxide.   <br />
+    <strong>Special protective equipment for fire-fighters</strong> <br/>
+    Wear self contained breathing apparatus for fire fighting if necessary.  <br/>
+</p>
+<p>
+    <strong>6. ACCIDENTAL RELEASE MEASURES </strong> <br />
+    <strong>Personal precautions</strong><br/>
+    Use personal protective equipment. Avoid dust formation. Avoid breathing dust. Ensure adequate ventilation. <br />
+    Evacuate personnel to safe areas.    <br />
+    <strong>Environmental precautions </strong><br />
+    Prevent further leakage or spillage if safe to do so. Do not let product enter drains. <br />
+    <strong>Methods for cleaning up </strong> <br />
+    Pick up and arrange disposal without creating dust. Keep in suitable, closed containers for disposal. <br />
+</p>
+<p>
+    <strong>7. HANDLING AND STORAGE  </strong><br />
+    <strong>Handling</strong> <br />
+    Avoid contact with skin and eyes. Avoid formation of dust and aerosols.<br />
+    Provide appropriate exhaust ventilation at places where dust is formed. Normal measures for preventive fire protection. <br />
+    <strong>Storage</strong><br />
+    Keep container tightly closed in a dry place in refrigerator (4 degree C).<br />
+</p>
+<p>
+    <strong>8. EXPOSURE CONTROLS/PERSONAL PROTECTION </strong> <br />
+    Contains no substances with occupational exposure limit values.  <br />
+    <strong>Personal protective equipment<br />
+        Respiratory protection  </strong> <br />
+    Where risk assessment shows air-purifying respirators are appropriate use a full-face particle respirator type N100 (US)
+    or type P3 (EN 143) respirator cartridges as a backup to engineering controls. If the respirator is the sole means of protection,
+    use a full-face supplied air respirator. Where risk assessment shows air-purifying respirators are appropriate use a full-face particle respirator
+    type N99 (US) or type P2 (EN 143) respirator cartridges as a backup to engineering controls. If the respirator is the sole means of protection,
+    use a full-face supplied air respirator. Use respirators and components tested and approved under appropriate government standards such as NIOSH (US) or CEN (EU).<br />
+    <strong>Hand protection </strong> <br />
+    Handle with gloves.  <br />
+    <strong>Eye protection</strong> <br />
+    Safety glasses
+    <strong>Skin and body protection</strong><br />
+    Choose body protection according to the amount and concentration of the dangerous substance at the work place.<br />
+    <strong>Hygiene measures </strong> <br />
+    Avoid contact with skin, eyes and clothing. Wash hands before breaks and immediately after handling the product. <br />
+</p>
+<p>
+    <strong>9. PHYSICAL AND CHEMICAL PROPERTIES </strong> <br />
+    <?php
+    echo "<strong>Appearance:</strong> $data[appearance] <br />\n";
+    echo "<strong>Color:</strong> $data[color] <br />\n";
+    ?>
+    <strong>Safety data </strong> <br />
+    Melting point:  no data available <br />
+    Boiling point:  no data available  <br />
+    Flash point:  no data available  <br />
+    Lower explosion limit: no data available <br />
+    Upper explosion limit: no data available  <br />
+    Water solubility: soluble   <br />
+</p>
+<p>
+    <strong>10. STABILITY AND REACTIVITY</strong>  <br />
+    <strong>Storage stability</strong><br />
+    Stable under recommended storage conditions. <br />
+    <strong>Conditions to avoid  </strong> <br />
+    None <br />
+    <strong>Materials to avoid </strong> <br />
+    Strong oxidizing agents  <br />
+    <strong>Hazardous decomposition products</strong> <br />
+    Hazardous decomposition products formed under fire conditions <br />
+</p>
+<p>
+    <strong>11. TOXICOLOGICAL INFORMATION</strong><br />
+    <strong>Sensitization</strong><br />
+    May cause sensitization by skin contact.<br />
+    <strong>Chronic exposure </strong> <br />
+    IARC: No component of this product present at levels greater than or equal to 0.1% is identified as probable, possible or confirmed human carcinogen by IARC.<br />
+    ACGIH: No component of this product present at levels greater than or equal to 0.1% is identified as a carcinogen or potential carcinogen by ACGIH.<br />
+    NTP: No component of this product present at levels greater than or equal to 0.1% is identified as a known or anticipated carcinogen by NTP.  <br />
+    OSHA: No component of this product present at levels greater than or equal to 0.1% is identified  <br />
+    <strong>Signs and Symptoms of Exposure</strong> <br />
+    Material is extremely destructive to tissue of the mucous membranes and upper respiratory tract, eyes, and skin.,<br />
+    Cough, Shortness of breath, Headache, Nausea   <br />
+    <strong>Potential Health Effects </strong><br />
+    <strong>Inhalation</strong> May be harmful if inhaled. Material is extremely destructive to the tissue of the mucous membranes and upper respiratory tract.<br />
+    <strong>Skin</strong> Harmful if absorbed through skin. Causes skin burns. <br />
+    <strong>Eyes</strong> Causes eye burns.<br />
+    <strong>Ingestion</strong> Toxic if swallowed. Causes burns. <br />
+</p>
+<p>
+    <strong>12. ECOLOGICAL INFORMATION </strong><br />
+    <strong>Elimination information (persistence and degradability)</strong><br />
+    no data available  <br />
+    <strong>Further information on ecology</strong><br />
+    no data available  <br />
+</p>
+<p>
+    <strong>13. DISPOSAL CONSIDERATIONS </strong>  <br />
+    <strong>Product</strong><br />
+    Observe all federal, state, and local environmental regulations. Contact a licensed professional waste disposal service to dispose of this material.
+    Dissolve or mix the material with a combustible solvent and burn in a chemical incinerator equipped with an afterburner and scrubber.<br />
+    <strong>Contaminated packaging </strong><br />
+    Dispose of as unused product.  <br />
+</p>
+<p>
+    <strong>14. TRANSPORT INFORMATION: </strong>      <br />
+    <strong>This substance is considered to be non-hazardous for transport. </strong><br />
+    UN-Number <br />
+    ADR/RID: -    IMDG: -	  IATA:-  <br />
+    UN proper shipping name    <br />
+    ADR/RID: Not dangerous goods <br />
+    IMDG: Not dangerous goods   <br />
+    IATA: Not dangerous goods    <br />
+    Transport hazard class(es)    <br />
+    ADR/RID: -   IMDG: -	   IATA:   <br />
+    Packaging group       <br />
+    ADR/RID: -   IMDG: -   IATA:  <br />
+    Environmental hazards   <br />
+    ADR/RID: no 	IMDG Marine pollutant: no   IATA: no  <br />
+</p>
+<p>
+    <strong>15. REGULATORY INFORMATION</strong><br />
+    <strong>OSHA Hazards</strong><br />
+    Toxic by ingestion, Harmful by skin absorption. Skin sensitizer, Corrosive   <br />
+    <strong>SARA 302 Components</strong> <br />
+    SARA 302: No chemicals in this material are subject to the reporting requirements of SARA Title III, Section 302. <br />
+    <strong>SARA 313 Components</strong> <br />
+    SARA 313: This material does not contain any chemical components with known CAS numbers that exceed the threshold (De Minimis)
+    reporting levels established by SARA Title III, Section 313.<br />
+</p>
+<p>
+    <strong>16. OTHER INFORMATION </strong> <br />
+    The above information is believed to be correct but does not purport to be all inclusive and shall be used only as a guide.
+    The information in this document is based on the present state of our knowledge and is applicable to the product with
+    regard to appropriate safety precautions. It does not represent any guarantee of the properties of the product. Acadia
+    Scientific LLC shall not be held liable for any damage resulting from handling or from contact with the above product.<br />
+</p>
+</body>
+</html>

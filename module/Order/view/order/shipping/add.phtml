@@ -1,0 +1,27 @@
+<?php
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('order/default', array('controller'=>'shipping','action'=>'add')));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}
+?>
+<script>
+
+
+
+    $(function() {
+    	$('[name="shipping_date"]').addClass("datepicker");
+    	
+
+        $( ".datepicker" ).datepicker({ dateFormat: "yy-mm-dd" }).val();
+
+
+    });
+
+
+</script>

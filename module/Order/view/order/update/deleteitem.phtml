@@ -1,0 +1,25 @@
+<?php
+
+
+$title = 'Delete item';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete item
+    <?php echo $this->escapeHtml($row->catalogNo); ?> Order: <?php echo $this->escapeHtml($row->order_id); ?>?
+</p>
+<?php
+$url = $this->url('order/default', array('controller'=>'update',
+    'action' => 'deleteitem',
+    
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo $row->id; ?>" />
+    <input type="hidden" name="order_id" value="<?php echo $row->order_id; ?>" />
+    <input type="submit" name="del" value="Yes" />
+    <input type="submit" name="del" value="No" />
+</div>
+</form>

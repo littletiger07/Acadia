@@ -1,0 +1,54 @@
+.content_div table{
+	margin-left: 20px;
+	margin-top:20px;
+	width: 630px;
+	font-size:small;
+	border-collapse: separate;
+           border-spacing: 2px;
+ 	text-align: center;
+	cellspacing:5px;
+	cellpadding: 5px;
+}
+
+.content_div table th,.content_div span{
+	align:center;
+	color:#b77606;
+	margin-left: 20px;
+	margin-top: 10px;
+	font-size:medium;
+}
+/*.content_div div{
+	margin-left:20px;
+	padding:10px;
+	width:200px;
+	height: 150px;
+	
+}*/
+.content_div div p{
+	font-size: 16px;
+}
+.content_div table td{
+	line-height: 24px;
+}
+
+.display_customer_address{
+	
+	margin-left: 20px;
+	margin-top:10px;
+	padding: 10px;
+	float:left;
+	width: 200px;
+	height:200px;
+	border: 1px solid #b77606;
+}
+.customer_menu{
+	width:200px;
+	height: 200px;
+	margin-top:10px;
+	margin-left:200px;
+	float: left;
+	
+}
+.customer_menu form{
+	align:right;
+}

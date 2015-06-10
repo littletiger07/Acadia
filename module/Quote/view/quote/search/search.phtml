@@ -1,0 +1,42 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showitems.css');
+if ($this->form)
+{
+    $form=$this->form;
+    $form->setAttribute('action', $this->url('quote/default', array('controller'=>'search','action'=>'search')));
+    $form->prepare();
+    echo $this->form()->openTag($form);
+    echo $this->formCollection($form);
+    echo $this->form()->closeTag();
+}else 
+if ($this->rowset)
+
+{
+    $url=$this->url('quote/default', array('controller'=>'search', 'action'=>'show'));
+    $output='';
+    $output.=
+    		'<table cellpadding="5" cellspacing="5"  >'.
+    		
+    		' <tr >'.
+    		'<th align="center">Date</th>'.
+    		'<th align="center">Email</th>'.
+    		'<th align="center">CAS</th>'.
+    		'<th align="center">quote</th>'.
+    		'<th align="center">Comment</th>'.
+    		'</tr>';
+    foreach ($this->rowset as $item)
+    {
+    	$output.= '<tr >'
+    			.'<td align="center">'.$item->quote_date.'</td>'
+    			.'<td align="center">'.$item->quote_email.'</td>'
+    			.'<td align="center">'.$item->quote_cas.'</td>'
+    			.'<td align="center">'.$item->quote_content.'</td>'
+    			.'<td align="center">'.$item->quote_comment.'</td>'
+    											.'</tr>';
+    }
+    $output.= '</tr>'
+    		
+    		.'</table>';
+    echo $output;
+    			
+}

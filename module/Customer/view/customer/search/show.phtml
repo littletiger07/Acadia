@@ -1,0 +1,45 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showcustomer.css');
+$row=$this->item;
+$output='<table><tr><th>Id</th>'
+				
+				.'<th>Name</th>'
+				.'<th>term</th>'
+				.'<th>phone</th>'
+				.'<th>Fax</th>'
+				.'<th>Email Address</th>'
+				.'<th>Comment</th>    </tr>'
+				
+			    .'<tr>'
+			    .'<td>'.$row->id.'</td>'
+			    .'<td>'.$row->customer_name.'</td>'
+			    .'<td>'.$row->term.'</td>'
+			    .'<td>'.$row->phone.'</td>'
+			    .'<td>'.$row->fax.'</td>'
+			    .'<td>'.$row->email.'</td>'
+			    .'<td>'.$row->customer_comment.'</td></tr>'
+				
+				
+				.'</table><br/>';
+// 				.'<span>Billing Address</span>'
+// 				.'<div width="50px" height="50px">'
+// 				.'<p >'.$row->address.'</p></div>'
+// 			    .'<br/><a href="/customer/update/delete?id='.$row->id.'">Delete this record</a>'
+//                 .'<br/><a href="/customer/update/update?id='.$row->id.'">Update this record</a>';
+?>
+
+<div class="display_customer_table">
+<?php echo $output;?>
+<span style="display:block">Billing Address</span>
+<div class="display_customer_address" >
+		<p ><?php echo nl2br($row->address);?></p></div>
+</div>
+<div class="customer_menu">
+<form action="/customer/update/update" method="get"><input type="hidden" name="id" value="<?php echo $row->id;?>">
+<input type="submit" name="send" value="Update Customer"></form>
+<form action="/customer/update/delete" method="get"><input type="hidden" name="id" value="<?php echo $row->id;?>">
+<input type="submit" name="send" value="Delete Customer"></form>
+<form action="/customer/search/getorders" method="get"><input type="hidden" name="id" value="<?php echo $row->id;?>">
+<input type="submit" name="send" value="Get Orders"></form>
+</div>
+

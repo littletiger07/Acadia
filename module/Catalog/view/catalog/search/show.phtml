@@ -1,0 +1,143 @@
+<?php
+$this->headLink()->appendStylesheet('/css/showitem.css');
+$item=$this->item;
+$identicals='';
+$identicalItems=$item->getIdenticals();
+if ($identicalItems)
+{
+    foreach($identicalItems as $row)
+        $identicals.='<a href="/catalog/search/show?catalogNo='.$row->catalogNo.'">'.$row->catalogNo.';</a>';
+}
+
+$output='';
+$output.=
+        		'<div style=" height:30px;font-size:16px; text-align:center"><strong>'."\n"
+        		      .$item->catalogNo.':'.$item->name.'</strong>'."\n"
+        		.'</div>'."\n"
+				
+				.'<div  class="showitem">'."\n"
+						.'<div  class="showitem_structure">'."\n"
+							.'<img  src="/img/mol/'.$item->catalogNo.'.png" width="187px" height="180px" /><br/>'."\n"
+							.'<a href="/catalog/search/msds?catalogNo='.$item->catalogNo.'">Msds</a>'
+						.'</div>'."\n"
+						.'<div  class="showitemprice">'."\n"
+							 .'<table  border="0" cellpadding="0" cellspacing="0" >'."\n"
+								  .'<tr>'."\n"
+								      .'<td width="80%" style="color:#b77606;"><strong>Price and Availability</strong></td>'."\n"
+									  .'<td width="6%"></td>'."\n"
+									  .'<td ></td>'."\n"
+								  .'</tr>'."\n"
+							 .'</table>'."\n"
+							 .'<table class="showpricetable">'."\n"
+    							 .'<tr>'."\n"
+    							     .'<th width="15%">Size</th><th width="35%">Price</th><th width="20%">Stock</th><th>Location</th>'."\n"
+    							 .'</tr><tr>'."\n"
+        							 .'<td>'.$item->package_size1.'</td><td>'.$item->price1.'</td>'."\n"
+        							 .'<td rowspan="2" style="text-align:center;">'.$item->getStock().'</td><td rowspan="2">'.$item->getLocation().'</td>'."\n"
+    							 .'</tr><tr>'."\n"
+    							 .   '<td>'.$item->package_size2.'</td><td>'.$item->price2.'</td>'."\n"
+    							 .'</tr>'."\n"
+							 .'</table>'."\n"
+							.'<br/><br/><table  width="100%" border="0" cellpadding="0" cellspacing="0" >'."\n"
+								  .'<tr>'."\n"
+								      .'<td width="30%" style="color:#b77606;"> <a href="/catalog/update/update?catalogNo='.$item->catalogNo.'">Update
+					                       </a></td>'."\n"
+									  .'<td width="40%"><a href="/catalog/update/delete?catalogNo='.$item->catalogNo.'">Delete
+					                        </a></td>'."\n"
+					                   .'<td width="30%"><a href="/catalog/search/getorders?catalogNo='.$item->catalogNo.'">Get Orders
+					                        </a></td>'."\n"
+								  .'</tr>'."\n"
+							 .'</table>'."\n"
+					    .'</div>'."\n";
+			
+if ($this->quotes)
+{
+	$output=$output.'<div class="quotes_div">'."\n"
+			.'<table cellpadding="5" cellspacing="5"  >'."\n"
+					
+					.' <tr>'."\n"
+							.'<th align="center">Date</th>'."\n"
+									.'<th align="center">Email</th>'."\n"
+											.'<th align="center">CAS</th>'."\n"
+													.'<th align="center">quote</th>'."\n"
+															.'<th align="center">Comment</th>'."\n"
+																	.'</tr>'."\n";
+	foreach ($this->quotes as $quote)
+	{
+		$output=$output. '<tr >'."\n"
+				.'<td align="center">'.$quote->quote_date.'</td>'."\n"
+						.'<td align="center">'.$quote->quote_email.'</td>'."\n"
+								.'<td align="center">'.$quote->quote_cas.'</td>'."\n"
+										.'<td align="center">'.$quote->quote_content.'</td>'."\n"
+												.'<td align="center">'.$quote->quote_comment.'</td>'."\n"
+														.'</tr>'."\n";
+	}
+	$output=$output
+		
+	.'</table>'
+				.'</div>';
+}
+
+					$output=$output.'<div class="item_desc_div">'
+					        .'<ul>'
+					            .'<li>'
+					                .'<dl class="item_desc">'
+					                    .'<dt>Product Name</dt>'
+					                    .'<dd>'.$item->name.'</dd>'
+					                .'</dl>'
+					            .'</li><li>'
+					                .'<dl class="item_desc">'
+					                    .'<dt>CAS Number</dt>'
+					                    .'<dd>'.$item->cas.'</dd>'
+					                .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Identical Items</dt>'
+					                    .'<dd>'.$identicals.'</dd>'
+					                  .'<dl>'
+					            .'</li><li>'
+					                .'<dl class="item_desc">'
+					                    .'<dt>Purity</dt>'
+					                    .'<dd>'.$item->purity.'</dd>'
+					                .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Smile Code</dt>'
+					                    .'<dd>'.$item->smile.'</dd>'
+					                  .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Formula</dt>'
+					                    .'<dd>'.$item->formula.'</dd>'
+					                  .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Molecular Weight</dt>'
+					                    .'<dd>'.$item->mw.'</dd>'
+					                  .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Appearance</dt>'
+					                    .'<dd>'.$item->appearance.'</dd>'
+					                  .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Color</dt>'
+					                    .'<dd>'.$item->color.'</dd>'
+					                .'<dl>'
+					            .'</li><li>'
+					                  .'<dl class="item_desc">'
+					                    .'<dt>Comment</dt>'
+					                    .'<dd>'.$item->comment.'</dd>'
+					                  .'<dl>'
+					            .'</li>'
+					        .'</ul>'
+					   .'</div>'
+					            
+					                
+					                
+				 .'</div>';
+       
+
+
+echo $output;

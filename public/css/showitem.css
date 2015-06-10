@@ -1,0 +1,41 @@
+.showitem{width:676px; float:left; font-size: small;}
+.showitem_structure{ width:220px; float:left; height:240px; background:#f8f5ef;overflow:hidden; text-align:center; padding-top:10px; margin-right:10px;}
+
+
+.showitemprice{float:left; overflow:hidden;width:420px;height:240px;  padding:10px 10px 0 10px; background:#f8f5ef;}
+
+}
+
+.showpricetable{ border-collapse:collapse; border:1px solid #f8f5ef; width:100%;  cellspacing:0; cellpadding:0; }
+.showpricetable td{ background-color:#FFFFFF;border-collapse:collapse; border:1px solid #f8f5ef; height:30px; line-height:30px;}
+.showpricetable th{text-align:left; background-color:#FFFFFF;border-collapse:collapse; border:1px solid #f8f5ef; height:30px; line-height:30px; color:#b77606; font-family:Arial; font-weight:bold;}
+
+.item_desc_div{ width:620px; background:#f8f5ef; float:left; margin-top:20px; padding:20px; line-height:30px;}
+.item_desc{ float:left;}
+.item_desc dt{ float:left; width:200px; display:block;color:#b77606;font-weight:bold;}
+.item_desc dd{ float:left; width:420px; display:block;}
+
+.quotes_div{width:620px; background:#f8f5ef;  margin-top:20px; padding:20px; line-height:30px;}
+.quotes_div table{
+	margin-left: 20px;
+	margin-top:20px;
+	width:520px;
+	font-size:small;
+	border-collapse: separate;
+           border-spacing: 2px;
+ 	text-align: center;
+	cellspacing:5px;
+	cellpadding: 5px;
+}
+.quotes_div table tr:nth-child(even){
+	background-color: yellow;
+}
+.quotes_div table th{
+	align:center;
+	color:#b77606;
+	
+}
+
+.quotes_div table td{
+	line-height: 24px;
+}

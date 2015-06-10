@@ -1,0 +1,11 @@
+<?php
+$this->headLink()->appendStylesheet('/css/form.css');
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('customer/default', array('controller'=>'update','action'=>'add')));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}

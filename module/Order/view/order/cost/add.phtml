@@ -1,0 +1,10 @@
+<?php
+if ($this->form)
+{
+	$form=$this->form;
+	$form->setAttribute('action', $this->url('order/default', array('controller'=>'cost','action'=>'add')));
+	$form->prepare();
+	echo $this->form()->openTag($form);
+	echo $this->formCollection($form);
+	echo $this->form()->closeTag();
+}

@@ -1,0 +1,266 @@
+
+<?php
+$this->headLink()->appendStylesheet('/css/showorder.css');
+$this->headScript()->offsetSetFile(100,'/js/showorder.js');
+
+if ($this->error)
+{
+    echo $this->error;
+    exit;
+}
+else 
+     $row=$this->item;
+     $showBlock=$this->showBlock;
+?>
+<div class="order_details">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>PO_Number</th>
+            <th>Customer</th>
+            <?php echo ($row->order_phone)? '<th>Phone</th>':null ;?>
+            <?php echo ($row->order_email)? '<th>Email</th>':null ;?>
+            <th>Order Date</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <?php echo ($row->order_comment)? '<th>Comment</th>':null ;?>
+        </tr>
+        <tr>
+            <td><?php echo $row->id;?></td>
+            <td><?php echo $row->PO_Number;?></td>
+            <td><?php echo $row->getCustomer()->customer_name;?></td>
+            <?php echo $row->order_phone? '<td>'.$row->order_phone.'</td>':null ;?>
+            <?php echo ($row->order_email)? '<td>'.$row->order_email.'</td>':null ;?>
+            <td><?php echo $row->order_date;?></td>
+            <td><?php echo $row->getOrderTotal();?></td>
+            <td><?php echo $row->status;?></td>
+             <?php echo ($row->order_comment)? '<td>'.$row->order_comment.'</td>':null ;?>
+        </tr>
+    </table>
+</div>
+<div class="order_actions">
+    <table>
+        <tr>
+            <td><div ><form action="/order/update/update" method="post"><input  type="hidden" name="id" 
+                    value="<?php echo $row->id;?>"><input type="submit" name="send" value="Update order"></form></div></td>
+            <td><div><form action="/order/update/delete" method="post"><input  type="hidden" name="id"
+                    value="<?php echo $row->id;?>"><input type="submit" name="send" value="Delete order"></form></div></td>
+            <td><div><form action="/order/update/additem" method="post"><input  type="hidden" name="order_id"
+                    value="<?php echo $row->id;?>"><input type="submit" name="send" value="Add item"></form></div></td>
+      
+            <td><div ><form action="/order/cost/add" method="post"><input  type="hidden" name="order_id" 
+                    value="<?php echo $row->id;?>"><input type="submit" name="send" value="Add Cost"></form></div></td>
+           <?php 
+           if (!$row->isCompleted())
+                       echo '<td><div><form action="/order/shipping/add" method="post"><input  type="hidden" name="order_id" 
+                         value="'.$row->id.'"><input type="submit" name="send" value="Ship this order"></form></div></td>';
+           else 
+           {
+               if ($row->getInvoice())
+               {
+                   echo '<td><div><form target="_blank" action="/invoice/create/view" method="post"><input type="hidden" name="order_id" value="'.$row->id.'">
+                            <input type="submit" name="send" value="View Invoice"></form></div></td>';
+               }
+               else 
+               {
+                   echo '<td><div><form action="/invoice/create/create" method="post"><input type="hidden" name="order_id" value="'.$row->id.'">
+                            <input type="submit" name="send" value="Create Invoice"></form></div></td>';
+               }
+           }
+           ?>
+        </tr>
+    </table>
+</div>
+
+<div class="order_items">
+<span><br/>The Following Items Included in This Order:</span>
+<?php $items=$row->getItems();?>
+    <table class="item_table">
+        <tr>
+            <th width="75px">Catalog Number</th>
+            <th width="120px">Structure</th>
+            <th width="50px">Package Size</th>
+            <th width="50px">Quantities</th>
+            <th width="50px">Unit Price</th>
+            <th width="150px">Actions</th>
+        </tr>
+<?php 
+    $url='/catalog/search/show';
+    foreach($items as $item)
+    {
+        $output='';
+        $output.='<tr >'
+        			.'<td align="center"><a href="'.$url.'?catalogNo='.$item->catalogNo.'">'.$item->catalogNo.'</a></td>'
+    				
+    				.'<td><IMG src="/img/mol/'.$item->catalogNo.'.png" width="100px" height="100px"  style="padding:10px;"/></a></td>'
+    				.'<td>'.$item->package_size.'</td>'
+                    .'<td>'.$item->quantities.'</td>'
+                    .'<td>'.$item->unit_price.'</td>'
+                    .'<td><div class="order_item_actions"><form action="/order/update/updateitem" method="post"><input type="hidden" name="id"
+                        value="'.$item->id.'"><input type="submit" name="send" value="update"></form>
+                        <form action="/order/update/deleteitem" method="post"><input type="hidden" name="id"
+                        value="'.$item->id.'"><input type="submit" name="send" value="delete"></form></div></td>'    
+                                        
+				 .'</tr>';
+        echo $output;
+    }
+    echo '</table>';
+?>
+    </table>
+</div>
+            
+<div class="shipping">
+<span id="showshipment" ><a href="#"><?php echo ($showBlock==1)? 'Here is the shippment incluced in this order:':'Click Here to Show Shippments Included in This Order:'?></a></span>
+<div id="shipment" class="shipment" style="display: <?php echo ($showBlock==1)? 'block':'none'?>">
+<?php $shippings=$row->getShippings()?>
+<?php 
+    foreach($shippings as $shipping)
+    {
+        $output='';
+        $output.='<table class="shipping_table">
+                    <tr>
+                        <th style="width: 40px;">ID</th>
+                        <th style="width: 100px;">Shipping Date</th>
+                        <th style="width: 100px;">Description</th>
+                        <th style="width: 60px;">Cost</th>
+                        <th style="width: 120px;">Tracking</th>';
+        $output.=$shipping->shipping_comment? '<th>Comment</th>':null;
+        $output.='</tr>';
+        $output.='<tr>
+                    <td>'.$shipping->id.'</td>
+                    <td>'.$shipping->shipping_date.'</td>
+                    <td>'.$shipping->description.'</td>
+                    <td>'.$shipping->cost.'</td>
+                    <td>'.$shipping->tracking.'</td>';
+        $output.=$shipping->shipping_comment? '<td>'.$shipping->shipping_comment.'</td>':null;
+                          
+         $output.=         '</tr>';
+         $output.='<tr ><td></td>
+                    <td><div ><form action="/order/shipping/packingslip" method="post"><input type="hidden" name="id" value="'.$shipping->id.'">
+                        <input  type="submit" name="send" value="View Packing Slip"></form></div></td>
+                    <td><div ><form action="/order/shipping/update" method="post"><input type="hidden" name="id" value="'.$shipping->id.'">
+                        <input type="submit" name="send" value="Update shipment"></form></div></td>
+                    <td><div ><form action="/order/shipping/delete" method="post"><input type="hidden" name="id" value="'.$shipping->id.'">
+                        <input style="margin-left:0;" type="submit" name="send" value="Delete shipment"></form></div></td>
+                    <td><div><form action="/order/shipping/additem" method="post"><input type="hidden" name="shipping_id" 
+                               value="'.$shipping->id.'"><input type="submit"
+                                    name="send" value="Add Item to shipment "></form></div></td></tr>
+                        <tr><td colspan="4"></td><td><div><form action="/order/shipping/invoice" method="post"><input type="hidden" name="id" 
+                               value="'.$shipping->id.'"><input type="submit"
+                                    name="send" value="invoice for shipping"></form></div></td></tr></table>';
+
+         $shipping_items=$shipping->getItems();
+         $output.='<div class="shipping_items">';
+         $output.='<span>The Following Items are Included in This Shipment:</span><br/>';
+         
+         $output.='<div class="shipping_item">
+                            <table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Catalog Number</th>
+                                    <th>Package Size</th>
+                                    <th>Quantities</th>
+                                    <th>Batch No.</th>
+                                    <th>Comment</th>
+                                </tr>';
+         
+         
+         foreach($shipping_items as $shipping_item)
+         {
+             $output.=           ' <tr>
+                                    <td>'.$shipping_item->id.'</td>
+    				                <td>'.$shipping_item->catalogNo.'</td>
+                                    <td>'.$shipping_item->amount.'</td>
+                                    <td>'.$shipping_item->shipping_quantities.'</td>
+                                    <td>'.$shipping_item->batch.'</td>
+                                    <td>'.$shipping_item->shipping_item_comment.'</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td><td><div><form action="/order/shipping/updateitem" method="post"><input type="hidden" name="id" 
+                                        value="'.$shipping_item->id.'"><input type="submit" name="send" value="Update"></form></div></td>
+                                    <td ><div><form action="/order/shipping/deleteitem" method="post"><input type="hidden" name="id" 
+                                        value="'.$shipping_item->id.'"><input type="submit" name="send" value="Delete"></form></div></td>
+                        
+                                </tr>';
+                    
+         }
+         $output.='</table></div>';
+         
+         
+         $output.='</div>';
+         echo $output;
+  
+    }
+    
+?>
+</div>
+</div>
+
+<div class="cost">
+<span id="showcost"><a href="#"><?php echo ($showBlock==2)? 'Here are the costs included in this order:':'Click Here to Show Costs Included in this order:';?></a></span>
+<div class="cost_item" id="cost" style="display: <?php echo ($showBlock==2)? 'block':'none';?>">
+<table class="cost_item_table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Comment</th>
+    </tr>
+<?php 
+    $items=$row->getCosts();
+    $output='';
+    foreach($items as $item)
+    {
+        $output.='<tr>
+                    <td>'.$item->id.'</td>
+                    <td>'.$item->cost_name.'</td>
+                    <td>'.$item->cost_description.'</td>
+                    <td>'.$item->cost_amount.'</td>
+                    <td>'.$item->cost_comment.'</td>
+                 </tr>
+                 <tr>
+                    <td colspan="3"></td>
+                    <td><div><form action="/order/cost/update" method="post"><input type="hidden" name="id" value="'.$item->id.'">
+                        <input type="submit" name="send" value="update"></form></div></td><td><div><form action="/order/cost/delete" method="post">
+                        <input type="hidden" name="id" value="'.$item->id.'">
+                        <input type="submit" name="send" value="Delete"></form></div></td>
+                </tr>';
+    }  
+    echo $output;               
+?>  
+</table>
+</div>
+</div>
+<div class="invoice">
+<span id="showinvoice"><a href="#"><?php echo ($showBlock==3)? 'Here is the invoice for the order:':'Click Here to Show Invoice for this order:';?></a></span>
+<div class="showinvoice" id="invoice" style="display: <?php echo ($showBlock==3)? 'block':'none';?>">
+<?php
+
+
+if ($invoice=$row->getInvoice())
+{
+    $output= '<table class="invoicetable"> 
+                      <tr><th>ID</th><th>Invoice Number</th><th>Invoice date</th><th>Total Amount</th><th>Invoice Status</th><th>Comment</th></tr>' 
+                   .'<tr><td>'.$invoice->id.'</td><td>'.$invoice->invoice_number.'</td><td>'.$invoice->invoice_date 
+                    .'</td><td>'.$row->getInvoiceTotal().'</td><td>'.$invoice->invoice_status.'</td><td>'.$invoice->invoice_comment.'</td></tr>'
+                    .'<tr><td colspan="3">';
+                    
+     if ($invoice->invoice_status!="paid")               
+                    
+         $output.='</td><td><div><form action="/invoice/create/setpaid" method="post"><input type="hidden" name="id" value="'.$invoice->id.'">
+                        <input type="submit" name="send" value="Set Paid"></form></div></td>';
+     else 
+         $output.='<td></td>';
+     $output.='<td><div><form action="/invoice/create/update" method="post"><input type="hidden" name="id" value="'.$invoice->id.'">
+                        <input type="submit" name="send" value="Update"></form></div></td>
+                        <td><div><form action="/invoice/create/delete" method="post"><input type="hidden" name="id" value="'.$invoice->id.'">
+                        <input type="submit" name="send" value="Delete"></form></div></td></tr>
+                
+                    </table>'; 
+    echo $output;
+}
+
+?>
+</div>
+</div>
